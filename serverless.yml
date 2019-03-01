@@ -1,0 +1,31 @@
+service: user-service
+
+provider:
+  name: aws
+  runtime: nodejs11.10.0
+  stage: dev
+  region: us-east-1
+  memorysize: 512
+
+functions:
+  userFunction:
+    handler: index.handler
+    events:
+      - http:
+          path: user
+          method: get
+      - http:
+          path: user/{id}
+          method: get
+      - http:
+          path: user
+          method: post
+      - http:
+          path: user/{id}
+          method: put
+      - http: 
+          path: user/{id}
+          method: delete
+
+plugins:
+  - serverless-offline 
